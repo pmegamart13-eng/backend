@@ -61,6 +61,20 @@ except Exception as e:
     print(f"❌ Firebase initialization error: {e}")
 
 app = FastAPI()
+# ⭐ Add CORS for frontend access
+origins = [
+    "https://pmm-for-frontend.vercel.app",
+    "https://pavanputramegamart.in"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 api_router = APIRouter(prefix="/api")
 security = HTTPBearer()
 
